@@ -11,8 +11,10 @@ import {
 import React from "react";
 import { MaterialIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 const LoginScreen = () => {
+  const navigation = useNavigation()
   return (
     <SafeAreaView
       style={{ flex: 1, backgroundColor: "white", alignItems: "center" }}
@@ -126,7 +128,7 @@ const LoginScreen = () => {
           </Pressable>
 
           <Pressable
-           
+           onPress={() => navigation.navigate("RegisterScreen")}
             style={{ marginTop: 10 }}
           >
             <Text style={{ textAlign: "center", fontSize: 16 }}>
