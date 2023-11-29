@@ -107,4 +107,24 @@ app.get("/verify/:token", async(req, res) => {
   }
 })
 
-app.post("/login", async)
+
+app.post("/login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ message: "Invalid email" });
+    }
+
+    if (user.password !== password) {
+      return res.status(404).json({ message: "Invalid password" });
+    }
+
+    const token = jwt.sign({ userId: user._id }, secretKey);
+
+    res.status(200).json({ token });
+  } catch (error) {
+    res.status(500).json({ message: "Login failed" });
+  }
+});
